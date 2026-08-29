@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Suporte de Turma</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%; overflow: hidden;
+    background: linear-gradient(160deg, #4E3FC7 0%, #6C5CE7 55%, #8E7CFB 100%);
+    font-family: -apple-system, Arial, Helvetica, sans-serif;
+    color: white;
+  }
+  .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+  .subtitulo {
+    font-size: 13.5px;
+    opacity: 0.85;
+    margin: 0;
+  }
+  .pista {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 56px;
+    margin: 34px 0 22px 0;
+    overflow: hidden;
+  }
+  .pista::after {
+    content: "";
+    position: absolute;
+    bottom: 8px; left: 0; right: 0;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0 14px, transparent 14px 26px);
+  }
+  .bicho {
+    position: absolute;
+    bottom: 10px;
+    font-size: 38px;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .cachorro { animation-name: correr; animation-duration: 2.1s; }
+  .moto { animation-name: correr; animation-duration: 2.1s; animation-delay: 0.18s; }
+  @keyframes correr {
+    from { left: -50px; transform: scaleX(-1); }
+    to   { left: 100%;  transform: scaleX(-1); }
+  }
+
+  .spinner {
+    width: 26px; height: 26px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+    margin-bottom: 14px;
+  }
+  @keyframes girar { to { transform: rotate(360deg); } }
+
+  #mensagem {
+    font-size: 13.5px;
+    opacity: 0.9;
+    min-height: 18px;
+  }
+
+  .credito {
+    position: absolute;
+    bottom: 18px;
+    font-size: 11px;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Suporte de Turma</h1>
+    <p class="subtitulo">Já vamos te levar pra lá...</p>
+
+    <div class="pista">
+      <div class="bicho cachorro">🐕</div>
+      <div class="bicho moto">🏍️💨</div>
+    </div>
+
+    <div class="spinner"></div>
+    <div id="mensagem">Acordando o sistema...</div>
+  </div>
+
+  <div class="credito">APP DESENVOLVIDO POR FABRÍCIO DA SILVA FRANÇA</div>
+
+  <script>
+    // ⚠️ TROQUE a linha abaixo pelo link de verdade do seu Apps Script
+    // (o mesmo link que termina em /exec)
+    var URL_DO_APP = "COLE_AQUI_O_LINK_DO_SEU_APP_DEPLOYADO";
+
+    var mensagens = [
+      "Acordando o sistema...",
+      "Organizando as atividades...",
+      "Quase lá...",
+      "Só mais um instantinho..."
+    ];
+    var indice = 0;
+    setInterval(function () {
+      indice = (indice + 1) % mensagens.length;
+      document.getElementById('mensagem').textContent = mensagens[indice];
+    }, 1700);
+
+    // Manda pro app de verdade. A tela só troca quando a resposta do
+    // Apps Script realmente começar a chegar — até lá, essa animação
+    // continua na tela, cobrindo exatamente o tempo de espera.
+    window.location.href = URL_DO_APP;
+  </script>
+</body>
+</html>
